@@ -1,38 +1,30 @@
-# NodeHub - 简洁的节点导航
+# NodeHub - AutoVPN节点导航
 
-NodeHub 是一个优雅的单页面应用，采用现代化设计风格，为 [SS-Collector](https://github.com/lagzian/SS-Collector) 项目提供导航服务。项目使用 Cloudflare Workers 部署，无需服务器，一键部署即可使用。
+NodeHub 是一个优雅的单页面应用，采用现代化设计风格，为 [AutoVPN](https://github.com/acymz/AutoVPN) 项目提供导航服务。项目使用 Cloudflare Workers 部署，无需服务器，一键部署即可使用。
 
 ## 特性
 
-- 🎨 简约现代的设计风格
+- PornHub 风格的设计
 - 📱 完美适配各种设备
 - 🚀 轻量级单页面应用
 - ⚡️ Cloudflare Workers 部署
-- 🔄 多种订阅格式支持
-- 🕒 自动定时更新节点
+- 🔄 GitHub Actions 自动更新
+- ✅ 节点可用性验证
 
-## 支持的订阅格式
+## 订阅格式
 
-- Clash Meta 订阅
-- 通用 Base64 订阅
-- sing-box 订阅
-- Reality 订阅
-- VMESS 订阅
-- Trinity SS/VMESS 订阅
+- V2ray 订阅链接
+  - 支持 v2rayN、v2rayNG、Qv2ray 等主流客户端
+  - 兼容 Clash Meta 等订阅转换
 
-## 更新频率
+## 功能特点
 
-- Shadowsocks/VMESS：每12小时更新
-- Reality/其他配置：每小时更新
-- Trinity 配置：每5小时更新
-
-## 支持的客户端
-
-- Clash Meta/Clash Verge
-- NekoRay/NekoBox
-- Shadowrocket
-- sing-box
-- V2ray 系列客户端
+- 自动采集：定时获取最新节点
+- 质量保证：节点经过验证筛选
+- 简单易用：一键复制订阅链接
+- 实时反馈：复制操作的视觉反馈
+- 自动更新：通过 GitHub Actions 执行
+- 可用性：所有节点经过严格测试
 
 ## 快速部署
 
@@ -52,9 +44,8 @@ NodeHub 是一个优雅的单页面应用，采用现代化设计风格，为 [S
 
 ## 致谢
 
-- 节点来源：[SS-Collector](https://github.com/lagzian/SS-Collector)
-- 节点分类：[new-configs-collector](https://github.com/lagzian/new-configs-collector)
-- 客户端支持：[Clash.Meta](https://github.com/MetaCubeX/Clash.Meta)、[sing-box](https://github.com/SagerNet/sing-box)
+- 节点来源：[AutoVPN](https://github.com/acymz/AutoVPN)
+- 自动更新：GitHub Actions
 
 ## 免责声明
 

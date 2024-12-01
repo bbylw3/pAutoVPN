@@ -1,355 +1,3 @@
-const CSS_CONTENT = `
-:root {
-    --primary: #ff9000;
-    --bg: #0f0f0f;
-    --card-bg: #1a1a1a;
-    --text: #ffffff;
-    --text-secondary: #999999;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, system-ui, sans-serif;
-    line-height: 1.5;
-}
-
-/* Header */
-.header {
-    background: #000;
-    padding: 1.5rem 0;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 100;
-}
-
-.logo {
-    font-size: 2rem;
-    font-weight: bold;
-    color: var(--text);
-}
-
-.logo span {
-    color: var(--primary);
-}
-
-/* Main Content */
-.main {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 8rem 2rem 4rem;
-}
-
-/* Hero Section */
-.hero {
-    text-align: center;
-    margin-bottom: 6rem;
-}
-
-.hero-title {
-    font-size: 3.5rem;
-    font-weight: bold;
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
-}
-
-.hero-title span {
-    color: var(--primary);
-}
-
-.hero-description {
-    font-size: 1.25rem;
-    color: var(--text-secondary);
-    max-width: 600px;
-    margin: 0 auto 2rem;
-}
-
-/* Features Grid */
-.features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    margin-bottom: 6rem;
-}
-
-.feature-card {
-    background: var(--card-bg);
-    padding: 2rem;
-    border-radius: var(--radius);
-    transition: transform 0.2s ease;
-}
-
-.feature-card:hover {
-    transform: translateY(-5px);
-}
-
-.feature-card h3 {
-    color: var(--primary);
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-.feature-card ul {
-    list-style: none;
-}
-
-.feature-card li {
-    color: var(--text-secondary);
-    margin-bottom: 0.75rem;
-    padding-left: 1.5rem;
-    position: relative;
-}
-
-.feature-card li:before {
-    content: "→";
-    color: var(--primary);
-    position: absolute;
-    left: 0;
-}
-
-/* Button */
-.cta-button {
-    display: inline-block;
-    background: var(--primary);
-    color: var(--text);
-    padding: 1rem 2.5rem;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: all 0.2s ease;
-}
-
-.cta-button:hover {
-    transform: translateY(-2px);
-    filter: brightness(110%);
-}
-
-/* Footer */
-.footer {
-    text-align: center;
-    padding: 4rem 0;
-    color: var(--text-secondary);
-    border-top: 1px solid rgba(255,255,255,0.1);
-}
-
-/* 添加页脚链接样式 */
-.footer a {
-    color: var(--primary);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.footer a:hover {
-    color: var(--text);
-    text-decoration: underline;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    .hero-title {
-        font-size: 2.5rem;
-    }
-    
-    .main {
-        padding: 6rem 1.5rem 3rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero-title {
-        font-size: 2rem;
-    }
-    
-    .hero-description {
-        font-size: 1.1rem;
-    }
-    
-    .feature-card {
-        padding: 1.5rem;
-    }
-}
-
-/* 订阅卡片特殊样式 */
-.subscription-card {
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.subscription-card h3 {
-    margin-bottom: 0.5rem;
-}
-
-.subscription-card:hover {
-    background: var(--primary);
-}
-
-.subscription-card:hover h3 {
-    color: var(--text);
-}
-
-/* 添加提示文本样式 */
-.subscription-tip {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    margin-top: 0.5rem;
-}
-
-.feature-card a {
-    color: var(--primary);
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-.feature-card a:hover {
-    color: var(--text);
-    text-decoration: underline;
-}
-`;
-
-const SCRIPT_CONTENT = `
-async function copySubscription(url) {
-    try {
-        await navigator.clipboard.writeText(url);
-        alert('订阅链接已复制到剪贴板！');
-    } catch (err) {
-        prompt('请复制以下订阅链接:', url);
-    }
-}
-`;
-
-const HTML_CONTENT = `
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NodeHub - 免费节点导航</title>
-    <style>${CSS_CONTENT}</style>
-</head>
-<body>
-    <header class="header">
-        <div class="logo">Node<span>Hub</span></div>
-    </header>
-
-    <main class="main">
-        <section class="hero">
-            <h1 class="hero-title">免费节点 <span>订阅合集</span></h1>
-            <p class="hero-description">
-                多协议支持，自动更新维护，完全免费的节点订阅服务
-            </p>
-            <a href="https://github.com/lagzian/SS-Collector" 
-               target="_blank" class="cta-button">
-                访问项目主页
-            </a>
-        </section>
-
-        <section class="features">
-            <div class="feature-card">
-                <h3>项目说明</h3>
-                <ul>
-                    <li>基于 SS-Collector 项目维护</li>
-                    <li>Shadowsocks/VMESS 每12小时更新</li>
-                    <li>Reality/其他配置每小时更新</li>
-                    <li>Trinity 配置每5小时更新</li>
-                </ul>
-            </div>
-            
-            <div class="feature-card">
-                <h3>使用方法</h3>
-                <ul>
-                    <li>复制对应客户端的订阅链接</li>
-                    <li>在客户端中添加订阅地址</li>
-                    <li>定期更新订阅以获取最新节点</li>
-                    <li>推荐每天更新一次订阅</li>
-                </ul>
-            </div>
-            
-            <div class="feature-card">
-                <h3>相关项目</h3>
-                <ul>
-                    <li><a href="https://github.com/lagzian/SS-Collector" target="_blank">SS-Collector</a> - 主要节点来源</li>
-                    <li><a href="https://github.com/MetaCubeX/Clash.Meta" target="_blank">Clash.Meta</a></li>
-                    <li><a href="https://github.com/SagerNet/sing-box" target="_blank">sing-box</a></li>
-                    <li><a href="https://github.com/lagzian/new-configs-collector" target="_blank">国家/地区分类订阅</a></li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="features">
-            <!-- 基础订阅 -->
-            <div class="feature-card subscription-card" 
-                onclick="copySubscription('https://raw.githubusercontent.com/lagzian/SS-Collector/main/mix_clash.yaml')">
-                <h3>Clash Meta 订阅</h3>
-                <p class="subscription-tip">点击复制订阅链接</p>
-            </div>
-            
-            <div class="feature-card subscription-card" 
-                onclick="copySubscription('https://raw.githubusercontent.com/lagzian/SS-Collector/main/mix_B64.txt')">
-                <h3>Base64 订阅</h3>
-                <p class="subscription-tip">点击复制订阅链接</p>
-            </div>
-            
-            <div class="feature-card subscription-card" 
-                onclick="copySubscription('https://raw.githubusercontent.com/lagzian/SS-Collector/main/mix_singbox.json')">
-                <h3>sing-box 订阅</h3>
-                <p class="subscription-tip">点击复制订阅链接</p>
-            </div>
-
-            <!-- Reality 订阅 -->
-            <div class="feature-card subscription-card" 
-                onclick="copySubscription('https://raw.githubusercontent.com/lagzian/SS-Collector/main/reality_B64.txt')">
-                <h3>Reality 订阅</h3>
-                <p class="subscription-tip">点击复制订阅链接</p>
-            </div>
-
-            <!-- VMESS 订阅 -->
-            <div class="feature-card subscription-card" 
-                onclick="copySubscription('https://raw.githubusercontent.com/lagzian/SS-Collector/main/vmess_B64.txt')">
-                <h3>VMESS 订阅</h3>
-                <p class="subscription-tip">点击复制订阅链接</p>
-            </div>
-
-            <!-- Trinity 订阅 -->
-            <div class="feature-card subscription-card" 
-                onclick="copySubscription('https://raw.githubusercontent.com/lagzian/SS-Collector/main/SS/Trinity')">
-                <h3>Trinity SS 订阅</h3>
-                <p class="subscription-tip">150+ 速度测试节点</p>
-            </div>
-
-            <div class="feature-card subscription-card" 
-                onclick="copySubscription('https://raw.githubusercontent.com/lagzian/SS-Collector/main/SS/VM_Trinity')">
-                <h3>Trinity VMESS 订阅</h3>
-                <p class="subscription-tip">200+ 速度测试节点</p>
-            </div>
-        </section>
-
-        <footer class="footer">
-            <p>本站基于 <a href="https://github.com/lagzian/SS-Collector" target="_blank">SS-Collector</a> 项目提供导航服务</p>
-            <p>感谢 <a href="https://github.com/lagzian" target="_blank">lagzian</a> 维护的免费节点项目</p>
-            <p>仅供学习交流使用，请遵守当地法律法规</p>
-            <p>上次更新时间：${getUpdateTime()}</p>
-        </footer>
-    </main>
-    <script>${SCRIPT_CONTENT}</script>
-</body>
-</html>`;
-
-// 获取更新时间
-function getUpdateTime() {
-    const now = new Date();
-    return now.toLocaleString('zh-CN', {
-        timeZone: 'Asia/Shanghai'
-    });
-}
-
 // 安全头
 const securityHeaders = {
     'Content-Type': 'text/html;charset=UTF-8',
@@ -358,6 +6,309 @@ const securityHeaders = {
     'X-Content-Type-Options': 'nosniff',
     'X-Frame-Options': 'DENY'
 };
+
+// 订阅源配置
+const SUBSCRIPTION_URLS = {
+    v2: 'https://raw.githubusercontent.com/acymz/AutoVPN/refs/heads/main/data/V2.txt'
+};
+
+// HTML 内容
+const HTML_CONTENT = `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NodeHub - AutoVPN节点导航</title>
+    <style>
+        :root {
+            --primary-color: #ff9000;
+            --secondary-color: #000000;
+            --background-color: #0f0f0f;
+            --card-background: #1b1b1b;
+            --text-color: #ffffff;
+            --text-secondary: #cccccc;
+            --shadow: 0 4px 6px rgba(0,0,0,0.3);
+            --max-width: 1100px;
+            --spacing: 20px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            padding: var(--spacing);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        header {
+            text-align: center;
+            padding: 25px 15px;
+            margin-bottom: var(--spacing);
+            background: var(--secondary-color);
+            border-radius: 5px;
+            border: 1px solid #222;
+        }
+
+        .logo {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 2.8em;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h1 span:first-child {
+            color: white;
+        }
+
+        h1 span:last-child {
+            color: var(--primary-color);
+            background: var(--primary-color);
+            padding: 0 10px;
+            border-radius: 5px;
+            color: black;
+        }
+
+        .project-intro {
+            margin-bottom: var(--spacing);
+            padding: 20px;
+            background: var(--card-background);
+            border-radius: 5px;
+            border: 1px solid #222;
+        }
+
+        .project-intro h2 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            display: inline-block;
+            background: var(--secondary-color);
+            padding: 5px 15px;
+            border-radius: 3px;
+        }
+
+        .subscription-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: var(--spacing);
+        }
+
+        .card {
+            background: var(--card-background);
+            border-radius: 5px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #222;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            border-color: var(--primary-color);
+        }
+
+        .button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            border: none;
+            border-radius: 3px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+            text-transform: uppercase;
+        }
+
+        .button:hover {
+            background-color: #ffa31a;
+            transform: translateY(-2px);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .feature-item {
+            padding: 15px;
+            background: var(--secondary-color);
+            border-radius: 5px;
+            text-align: center;
+            border: 1px solid #222;
+        }
+
+        .feature-item h4 {
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .update-info {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            padding: 15px;
+            background: var(--secondary-color);
+            border-radius: 5px;
+            border: 1px solid #222;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .project-links a {
+            padding: 10px 20px;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            text-decoration: none;
+            border-radius: 3px;
+            border: 1px solid var(--primary-color);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .project-links a:hover {
+            background: var(--primary-color);
+            color: var(--secondary-color);
+        }
+
+        footer {
+            margin-top: auto;
+            text-align: center;
+            padding: 20px;
+            background: var(--secondary-color);
+            border-radius: 5px;
+            border: 1px solid #222;
+        }
+
+        footer p {
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: #ffa31a;
+        }
+
+        footer span {
+            color: #444;
+            margin: 0 8px;
+        }
+
+        @media (max-width: 768px) {
+            .features {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><span>Node</span><span>Hub</span></h1>
+            <p>AutoVPN节点导航服务</p>
+        </header>
+
+        <main>
+            <div class="project-intro">
+                <h2>关于 AutoVPN</h2>
+                <p>AutoVPN 是一个自动化的节点采集工具,通过 GitHub Actions 定时从多个来源获取并验证节点信息。所有节点经过严格筛选,确保可用性。</p>
+                
+                <div class="features">
+                    <div class="feature-item">
+                        <h4>自动采集</h4>
+                        <p>定时更新可用节点</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>质量保证</h4>
+                        <p>节点经过验证筛选</p>
+                    </div>
+                    <div class="feature-item">
+                        <h4>简单易用</h4>
+                        <p>一键复制订阅链接</p>
+                    </div>
+                </div>
+
+                <div class="update-info">
+                    <p>⚡️ 通过 GitHub Actions 自动更新</p>
+                    <p>🔍 所有节点经过可用性验证</p>
+                </div>
+
+                <div class="project-links">
+                    <a href="https://github.com/acymz/AutoVPN" target="_blank">GitHub 仓库</a>
+                </div>
+            </div>
+
+            <section class="subscription-list">
+                <div class="card">
+                    <h3>V2ray 订阅</h3>
+                    <button class="button" onclick="copyToClipboard('${SUBSCRIPTION_URLS.v2}', this)">复制链接</button>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>数据来源：<a href="https://github.com/acymz/AutoVPN" target="_blank">AutoVPN</a></p>
+        </footer>
+    </div>
+
+    <script>
+        function copyToClipboard(text, button) {
+            navigator.clipboard.writeText(text).then(() => {
+                button.classList.add('copy-tooltip', 'show');
+                setTimeout(() => {
+                    button.classList.remove('show');
+                }, 2000);
+            }).catch(err => {
+                console.error('复制失败:', err);
+            });
+        }
+    </script>
+</body>
+</html>`;
 
 // 请求处理
 async function handleRequest(request) {
